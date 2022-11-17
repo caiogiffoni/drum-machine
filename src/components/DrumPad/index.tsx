@@ -1,4 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 interface IPad {
   src: {
@@ -8,12 +9,22 @@ interface IPad {
 }
 
 export const Drumpad = ({ src }: IPad) => {
-  const start = async () => {
-    // let audio = new Audio(src.audio);
-    // await audio.play();
+  const start = () => {
     const audio: HTMLVideoElement = document.querySelector(`#${src.letter}`)!;
     audio.play();
   };
+
+  const pressedKey = (e: any) => {
+    if (e.key.toLowerCase() === src.letter.toLowerCase()) {
+      const audio: HTMLVideoElement = document.querySelector(`#${src.letter}`)!;
+      audio.play();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", pressedKey);
+  });
+
   return (
     <Box
       id={`box-${src.letter}`}
