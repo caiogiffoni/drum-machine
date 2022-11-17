@@ -1,34 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { Box, Switch, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { audios } from "./assets/audio-source";
+import reactLogo from "./assets/react.svg";
+import { Drumpad } from "./components/DrumPad";
 // import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <Box
+      w="100vw"
+      h="100vh"
+      bgColor="#8d8d8d"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box
+        id="drum-machine"
+        w="660px"
+        h="316px"
+        bgColor="#b3b3b3"
+        outline="5px solid orange"
+        display="flex"
+      >
+        <Box
+          w="60%"
+          h="100%"
+          display="flex"
+          justifyContent="flex-start"
+          flexWrap="wrap"
+          p="15px"
+          gap="10px"
+        >
+          {audios &&
+            audios.map((audio) => <Drumpad key={audio.letter} src={audio} />)}
+        </Box>
+        <Box id="display" w="40%">
+          <Text>Power</Text>
+
+          <Switch />
+        </Box>
+      </Box>
+    </Box>
+  );
 }
 
-export default App
+export default App;
