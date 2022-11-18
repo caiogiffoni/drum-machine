@@ -1,10 +1,13 @@
 import { Box, Switch, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { audios } from "./assets/audio-source";
 import { Drumpad } from "./components/DrumPad";
 import { useDisplay } from "./providers/display";
 
 function App() {
   const { display } = useDisplay();
+  const [power, setPower] = useState(true);
+
   return (
     <Box
       w="100vw"
@@ -32,7 +35,9 @@ function App() {
           gap="10px"
         >
           {audios &&
-            audios.map((audio) => <Drumpad key={audio.letter} src={audio} />)}
+            audios.map((audio) => (
+              <Drumpad key={audio.letter} src={audio} power={power} />
+            ))}
         </Box>
         <Box
           w={["100%", "100%", "40%"]}
@@ -42,7 +47,7 @@ function App() {
           alignItems="center"
         >
           <Text mt="25px">Power</Text>
-          <Switch defaultChecked />
+          <Switch defaultChecked onChange={() => setPower(!power)} size="lg" />
           <Box w="200px" p="15px" bgColor="gray" m="15px">
             <Text id="display" textAlign="center" minH="24px">
               {display}

@@ -7,26 +7,32 @@ interface IPad {
     letter: string;
     audio: string;
   };
+  power: boolean;
 }
 
-export const Drumpad = ({ src }: IPad) => {
-  const { display, setDisplay } = useDisplay();
+export const Drumpad = ({ src, power }: IPad) => {
+  const { setDisplay } = useDisplay();
 
   const start = () => {
+    if (!power) return;
+    setDisplay(`Letter ${src.letter}`);
     const audio: HTMLVideoElement = document.querySelector(`#${src.letter}`)!;
-    audio.play().then((_) => setDisplay(`Letra ${src.letter}`));
+    audio.play();
   };
 
   const pressedKey = (e: any) => {
+    if (!power) return;
+    setDisplay(`Letter ${src.letter}`);
     if (e.key.toLowerCase() === src.letter.toLowerCase()) {
       const audio: HTMLVideoElement = document.querySelector(`#${src.letter}`)!;
-      audio.play().then((_) => setDisplay(`Letra ${src.letter}`));
+      audio.play();
+      // audio.play().then((_) => setDisplay(`${src.letter}`));
     }
   };
 
   useEffect(() => {
     document.addEventListener("keydown", pressedKey);
-  });
+  }, []);
 
   return (
     <Box
