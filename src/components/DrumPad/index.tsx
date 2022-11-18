@@ -1,5 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { useDisplay } from "../../providers/display";
 
 interface IPad {
   src: {
@@ -9,15 +10,17 @@ interface IPad {
 }
 
 export const Drumpad = ({ src }: IPad) => {
+  const { display, setDisplay } = useDisplay();
+
   const start = () => {
     const audio: HTMLVideoElement = document.querySelector(`#${src.letter}`)!;
-    audio.play();
+    audio.play().then((_) => setDisplay(`Letra ${src.letter}`));
   };
 
   const pressedKey = (e: any) => {
     if (e.key.toLowerCase() === src.letter.toLowerCase()) {
       const audio: HTMLVideoElement = document.querySelector(`#${src.letter}`)!;
-      audio.play();
+      audio.play().then((_) => setDisplay(`Letra ${src.letter}`));
     }
   };
 
