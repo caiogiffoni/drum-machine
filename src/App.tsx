@@ -16,17 +16,17 @@ function App() {
     >
       <Box
         id="drum-machine"
-        w="660px"
-        h="316px"
+        w={["280px", "316px", "660px"]}
+        h={["400px", "400px", "316px"]}
         bgColor="#b3b3b3"
         outline="5px solid orange"
         display="flex"
+        flexDirection={["column", "column", "row"]}
       >
         <Box
-          w="60%"
-          h="100%"
+          w={["100%", "100%", "60%"]}
           display="flex"
-          justifyContent="flex-start"
+          justifyContent="center"
           flexWrap="wrap"
           p="15px"
           gap="10px"
@@ -35,7 +35,7 @@ function App() {
             audios.map((audio) => <Drumpad key={audio.letter} src={audio} />)}
         </Box>
         <Box
-          w="40%"
+          w={["100%", "100%", "40%"]}
           display="flex"
           flexDirection="column"
           justifyContent="flex-start"

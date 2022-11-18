@@ -32,8 +32,8 @@ export const Drumpad = ({ src }: IPad) => {
     <Box
       id={`box-${src.letter}`}
       bgColor="grey"
-      w="100px"
-      h="80px"
+      w={["75px", "80px", "100px"]}
+      h={["60px", "60px", "80px"]}
       borderRadius="5px"
       boxShadow="black 3px 3px 5px"
       display="flex"
